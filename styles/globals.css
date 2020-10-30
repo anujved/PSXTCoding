@@ -181,6 +181,10 @@ aside{
 .filter_wrapper .active {
   background: rgb(124,186,1);
 }
+.filter_wrapper button:disabled{
+  opacity:.9
+}
+
 .dev-name {
   text-align: center;
   margin-top: 100px;
