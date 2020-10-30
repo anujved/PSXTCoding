@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo}  from "react";
 import { map } from "loadsh";
 import FilterIteam from "./filter-iteam";
 /**

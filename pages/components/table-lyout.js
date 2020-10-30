@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 /**
  *
  * @param {string} label required

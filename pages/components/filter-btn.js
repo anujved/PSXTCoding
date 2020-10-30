@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useCallback } from "react";
 import { toString } from "loadsh";
-
+import { get} from "loadsh";
+import filterContext from "../../helper/context";
 /**
  *
  * @param {string} filterValue required filter label
@@ -12,6 +13,12 @@ import { toString } from "loadsh";
  */
 
 const FilterBtn = ({ filterValue, id, filterIteamFn, selected }) => {
+  const context = useContext(filterContext);
+
+  const loading = () => {
+    return get(context, 'loading');
+  }
+
   const filterFn = () => {
     if (toString(selected) !== toString(filterValue)) {
       filterIteamFn(id, toString(filterValue));
@@ -23,7 +30,7 @@ const FilterBtn = ({ filterValue, id, filterIteamFn, selected }) => {
 
   return (
     <li>
-      <button onClick={filterFn} className={classAdd}>
+      <button onClick={filterFn} className={classAdd} disabled={loading()}>
         {toString(filterValue)}
       </button>
     </li>

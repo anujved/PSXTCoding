@@ -72,6 +72,7 @@ export default function Index({ launches, filter }) {
   const filterValue = {
     filter: filterData,
     filterFn: applyFilter,
+    loading:loading
   };
 
   return (
@@ -136,6 +137,7 @@ const LoadingComponent = ({ loading, children }) => {
   return  children ;
   
 };
+
 const ShowRicords = ({ record, children }) => {
   if (record) {
     return record.length !== 0 ? children : <div>records not found</div>;
