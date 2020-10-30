@@ -7,6 +7,7 @@ import { toString } from "loadsh";
  * @param {string} id required current filter section
  * @param {Function} filterIteamFn required trigger current filter function
  * @param {string} selected required current section selected filter
+ * @author Anuj Gupta
  *
  */
 

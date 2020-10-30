@@ -3,6 +3,7 @@ import { map } from "loadsh";
 import FilterIteam from "./filter-iteam";
 /**
  * @description static filter list
+ * @author Anuj Gupta
  *
  * */
 
