@@ -25,6 +25,8 @@ export default function Index({ launches, filter }) {
 
   const [filterData, setFilterData] = useState(filter);
 
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   /**
@@ -34,7 +36,8 @@ export default function Index({ launches, filter }) {
    */
   const applyFilter = async (fil) => {
     const allQuery = { ...get(router, "query"), ...fil };
-
+    setLoading(true);
+    setFilterData(allQuery);
     const queryPus = reduce(
       allQuery,
       (result, value, key) => {
@@ -48,7 +51,6 @@ export default function Index({ launches, filter }) {
       `https://api.spaceXdata.com/v3/launches?limit=100&${queryPus}`
     );
     const launchesClientResponse = await res.json();
-    setFilterData(allQuery);
     setLaunchesJson(launchesClientResponse);
 
     router.push(
@@ -59,6 +61,7 @@ export default function Index({ launches, filter }) {
       undefined,
       { shallow: true }
     );
+    setLoading(false);
   };
 
   /**
@@ -88,11 +91,13 @@ export default function Index({ launches, filter }) {
         </aside>
         <main className="right">
           <div className="row">
-            <ShowRicords record={launchesJson}>
-              {map(launchesJson, (post, index) => (
-                <LaunchesList key={index} launch={post} />
-              ))}
-            </ShowRicords>
+              <LoadingComponent loading={loading}>
+              <ShowRicords record={launchesJson}>
+                {map(launchesJson, (post, index) => (
+                  <LaunchesList key={index} launch={post} />
+                ))}
+              </ShowRicords>
+            </LoadingComponent>
           </div>
         </main>
       </div>
@@ -122,6 +127,15 @@ export async function getServerSideProps(ctx) {
   };
 }
 
+const LoadingComponent = ({ loading, children }) => {
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  } 
+  
+  return  children ;
+  
+};
 const ShowRicords = ({ record, children }) => {
   if (record) {
     return record.length !== 0 ? children : <div>records not found</div>;
