@@ -4,7 +4,11 @@ This is a Publicis Sapient PS - XT Coding Assignment
 
 ```bash
 npm install
-then 
+after 
 npm run dev
 ```
-For
+Server Side rending: NextJS https://nextjs.org/
+    using getServerSideProps method to push API data on server-side
+
+Client Side : ReactJs
+
