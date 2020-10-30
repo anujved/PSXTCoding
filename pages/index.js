@@ -74,7 +74,7 @@ export default function Index({ launches, filter }) {
   return (
     <Layout>
       <Head>
-        <title>Create Next App</title>
+        <title>SpaceX Launch Programs</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="global_header">
