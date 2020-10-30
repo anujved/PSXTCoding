@@ -1,3 +1,5 @@
+import React from "react";
+import Image from 'next/image'
 /**
  *
  * @param {String} url required
@@ -7,7 +9,7 @@
  *
  */
 const Img = ({ url }) => {
-    return <div className="url_wrapper"><img src={url}  /></div>;
+    return <div className="url_wrapper"><Image src={url} unsized={true} loading="lazy"/></div>;
   };
 
 export default Img;

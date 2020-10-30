@@ -17,10 +17,10 @@ const LaunchesList = ({ launch }) => {
       <div className="launch_item">
         <Img url={get(launch, "links.mission_patch_small")} />
         <h1>{get(launch, "mission_name")}</h1>
-        <ul class="detailcomponent">
+        <ul className="detailcomponent">
         <TableLyout
           label="Mission Ids:"
-          text={get(launch, "mission_id").join()}
+          text={get(launch, "mission_id",[]).join()}
         />
         <TableLyout label="Launch Year" text={get(launch, "launch_year")} />
         <TableLyout

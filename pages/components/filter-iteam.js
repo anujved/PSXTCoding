@@ -13,7 +13,7 @@ const FilterIteam = ({ value }) => {
       <label>{get(value, "label")}</label>
       <ul>
         {map(get(value, "fields"), (filterValue, fieldsIndex) => (
-          <FilterIteamList key={fieldsIndex} filterValue={filterValue} />
+          <FilterIteamList key={fieldsIndex} filterValue={filterValue}  id={get(value, "id")}/>
         ))}
       </ul>
     </div>
@@ -22,12 +22,15 @@ const FilterIteam = ({ value }) => {
 
 export default FilterIteam;
 
-const FilterIteamList = ({ filterValue }) => {
+const FilterIteamList = ({ filterValue,id }) => {
   const context = useContext(filterContext);
-  console.log(context);
+  const filterFn = () =>{
+    context.filterFn({[id]:get(filterValue, "label").toString()})
+  }
+
   return (
     <li>
-      <button>{get(filterValue, "label").toString()}</button>
+      <button onClick={filterFn}>{get(filterValue, "label").toString()}</button>
     </li>
   );
 };

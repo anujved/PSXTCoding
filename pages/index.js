@@ -1,21 +1,48 @@
 import Head from "next/head";
 import Layout from "./components/layout";
-import { map,get } from "loadsh";
+import { map, get, reduce, isNull, isUndefined, some } from "loadsh";
 import LaunchesList from "./components/launchesList";
+import Filters from "./components/filters";
+import { ItemExpenseProvider } from "../helper/context";
+import React from "react";
+import { useRouter } from "next/router";
+import DevelopDesign from "./components/designby";
 import "../styles/Home.module.css";
-import Filters from './components/filters';
-import {ItemExpenseProvider} from '../helper/context';
-
 /**
  *
  * @description Index page serving when user land on the application
  * @author Anuj Gupta
  *
  */
-
 export default function Index({ launches, filter }) {
-  // const [filterData, setFilterData] = useState(launches);
-  console.log(filter);
+  const router = useRouter();
+
+
+  const applyFilter = (fil) => {
+    const allQuery = {...filter,...fil }
+    console.log(filter);
+    const filterNotEmpty = some(filter, x => {
+      console.log(x);
+    });
+    // console.log(filterNotEmpty);
+    const queryPus = reduce(allQuery, (result, value, key)=>{
+      return (!isNull(value) && ! isUndefined(value) && value != '') ? (result += key + '=' + value + '&') : result;
+    }, '').slice(0, -1);
+   
+    router.push({
+       pathname: '/',
+       query: queryPus
+       }, undefined, { shallow: true });
+    // router.push({
+    //   pathname: '/',
+    //   query: queryPus
+    //   });
+  };
+
+  const filterValue = {
+    filter,
+    filterFn: applyFilter,
+  };
 
   return (
     <Layout>
@@ -28,7 +55,7 @@ export default function Index({ launches, filter }) {
       </header>
       <div className="container">
         <aside className="left">
-          <ItemExpenseProvider value={filter}>
+          <ItemExpenseProvider value={filterValue}>
             <Filters />
           </ItemExpenseProvider>
         </aside>
@@ -47,7 +74,6 @@ export default function Index({ launches, filter }) {
     </Layout>
   );
 }
-
 /**
  *
  * @returns object array list first render
@@ -55,21 +81,18 @@ export default function Index({ launches, filter }) {
  * @author Anuj Gupta
  *
  */
-
-export async function getServerSideProps(ctx) {
-  const launchFilter = get(ctx,'query.launch_success',''); 
-  const landFilter = get(ctx,'query.land_success',''); 
-  const launchYear = get(ctx,'query.launch_year',''); 
-  const res = await fetch(`https://api.spaceXdata.com/v3/launches?limit=100&launch_success=${launchFilter}&land_success=${landFilter}&launch_year=${launchYear}`);
-
-  const launches = await res.json();
-  return { props: { launches,filter:{launchFilter, landFilter, launchYear}  } }
-}
-
-const DevelopDesign = () => {
-  return (
-    <p className="dev-name">
-      <b>Developed by:</b>Anuj Gupta
-    </p>
+export async function getStaticProps( context ) {
+  console.log(context.params);
+  const params ={};
+  const launch_success = get(params, "launch_success", "");
+  const land_success = get(params, "land_success", "");
+  const launch_year = get(params, "launch_year", "");
+  const res = await fetch(
+    `https://api.spaceXdata.com/v3/launches?limit=100&launch_success=${launch_success}&land_success=${land_success}&launch_year=${launch_year}`
   );
-};
+  const launches = await res.json();
+  return {
+    props: { launches, filter: { launch_success, land_success, launch_year } },
+    revalidate: 10, // In seconds
+  };
+}

@@ -9,6 +9,7 @@ import FilterIteam from "./filter-iteam"
 const filtersList = {
   launch_year: {
       label: "Launch Year",
+      id:"launch_year",
       fields: [
         {
           label:2006,
@@ -74,10 +75,12 @@ const filtersList = {
     },
     launch_success: {
       label: "Successfull Launch",
+      id:"launch_success",
       fields: [{label:true,active:false}, {label:false,active:false}],
     },
     land_success: {
       label: "Successfull Landing",
+      id:"land_success",
       fields: [{label:true,active:false}, {label:false,active:false}],
     },
   };
