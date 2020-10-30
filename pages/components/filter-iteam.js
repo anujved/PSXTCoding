@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext} from 'react';
 import { get, map } from "loadsh";
 import filterContext from "../../helper/context"
 
@@ -27,6 +27,7 @@ const FilterIteamList = ({ filterValue,id }) => {
   const filterFn = () =>{
     context.filterFn({[id]:get(filterValue, "label").toString()})
   }
+  
 
   return (
     <li>

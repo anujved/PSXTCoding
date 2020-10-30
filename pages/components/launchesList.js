@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import SuccessFail from "./success-fail";
 import { get } from "loadsh";
 import Img from "./img"
