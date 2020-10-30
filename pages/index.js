@@ -4,7 +4,7 @@ import { map, get, reduce, isNull, isUndefined, some } from "loadsh";
 import LaunchesList from "./components/launchesList";
 import Filters from "./components/filters";
 import { ItemExpenseProvider } from "../helper/context";
-import React from 'react';
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import DevelopDesign from "./components/designby";
 import "../styles/Home.module.css";
@@ -15,32 +15,59 @@ import "../styles/Home.module.css";
  *
  */
 export default function Index({ launches, filter }) {
+  /**
+   *
+   * @description state declare
+   *
+   */
+
+  const [launchesJson, setLaunchesJson] = useState(launches);
+
+  const [filterData, setFilterData] = useState(filter);
+
   const router = useRouter();
 
+  /**
+   *
+   * @param {string} fil filter value
+   *
+   */
+  const applyFilter = async (fil) => {
+    const allQuery = { ...get(router, "query"), ...fil };
 
-  const applyFilter = (fil) => {
-    const allQuery = {...filter,...fil }
-    console.log(filter);
-    const filterNotEmpty = some(filter, x => {
-      console.log(x);
-    });
-    // console.log(filterNotEmpty);
-    const queryPus = reduce(allQuery, (result, value, key)=>{
-      return (!isNull(value) && ! isUndefined(value) && value != '') ? (result += key + '=' + value + '&') : result;
-    }, '').slice(0, -1);
-   
-    router.push({
-       pathname: '/',
-       query: queryPus
-       }, undefined, { shallow: true });
-    // router.push({
-    //   pathname: '/',
-    //   query: queryPus
-    //   });
+    const queryPus = reduce(
+      allQuery,
+      (result, value, key) => {
+        return !isNull(value) && !isUndefined(value) && value != ""
+          ? (result += key + "=" + value + "&")
+          : result;
+      },
+      ""
+    ).slice(0, -1);
+    const res = await fetch(
+      `https://api.spaceXdata.com/v3/launches?limit=100&${queryPus}`
+    );
+    const launchesClientResponse = await res.json();
+    setFilterData(allQuery);
+    setLaunchesJson(launchesClientResponse);
+
+    router.push(
+      {
+        pathname: "/",
+        query: queryPus,
+      },
+      undefined,
+      { shallow: true }
+    );
   };
 
+  /**
+   *
+   * @description context property set
+   *
+   */
   const filterValue = {
-    filter,
+    filter: filterData,
     filterFn: applyFilter,
   };
 
@@ -61,10 +88,11 @@ export default function Index({ launches, filter }) {
         </aside>
         <main className="right">
           <div className="row">
-            {launches &&
-              map(launches, (post, index) => (
+            <ShowRicords record={launchesJson}>
+              {map(launchesJson, (post, index) => (
                 <LaunchesList key={index} launch={post} />
               ))}
+            </ShowRicords>
           </div>
         </main>
       </div>
@@ -81,18 +109,23 @@ export default function Index({ launches, filter }) {
  * @author Anuj Gupta
  *
  */
-export async function getStaticProps( context ) {
-  console.log(context.params);
-  const params ={};
-  const launch_success = get(params, "launch_success", "");
-  const land_success = get(params, "land_success", "");
-  const launch_year = get(params, "launch_year", "");
+export async function getServerSideProps(ctx) {
+  const launch_success = get(ctx, "query.launch_success", "");
+  const land_success = get(ctx, "query.land_success", "");
+  const launch_year = get(ctx, "query.launch_year", "");
   const res = await fetch(
     `https://api.spaceXdata.com/v3/launches?limit=100&launch_success=${launch_success}&land_success=${land_success}&launch_year=${launch_year}`
   );
   const launches = await res.json();
   return {
     props: { launches, filter: { launch_success, land_success, launch_year } },
-    revalidate: 10, // In seconds
   };
 }
+
+const ShowRicords = ({ record, children }) => {
+  if (record) {
+    return record.length !== 0 ? children : <div>records not found</div>;
+  } else {
+    return;
+  }
+};

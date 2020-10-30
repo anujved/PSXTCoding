@@ -95,13 +95,15 @@ table {
 }
 .detailcomponent li span{
   float: right;
+  font-weight: normal;
 }
 .detailcomponent li:first-child{
   font-weight:800
 }
 h1{
   font-size: 22px;
-  color: red;
+  color: #4570e9;
+    font-weight: 600;
 }
 .url_wrapper{
   background :rgb(242,242,242);
@@ -133,8 +135,9 @@ h1{
 
 .global_header{
   padding: 20px;
-  background: red;
+  background: #7cba01;
   margin-bottom: 70px;
+  
 }
 
 .global_header h1{
@@ -166,22 +169,27 @@ aside{
 }
 
 .filter_wrapper button{
-  background: turquoise;
+  background: rgb(197,224,155);
   color: #333;
   border: none;
   margin-bottom: 10px;
   padding: 10px;
   font-weight: 500;
   border-radius: 7px;
+  cursor: pointer;
 }
-
+.filter_wrapper .active {
+  background: rgb(124,186,1);
+}
 .dev-name {
   text-align: center;
   margin-top: 100px;
   margin-bottom: 50px;
   font-size: 12px;
 }
-
+b {
+  font-weight: 600;
+}
 
 @media screen and (max-width: 1200px) {
   main .row>.col {

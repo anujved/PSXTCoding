@@ -1,6 +1,6 @@
-import React from 'react';
-import {map} from "loadsh";
-import FilterIteam from "./filter-iteam"
+import React from "react";
+import { map } from "loadsh";
+import FilterIteam from "./filter-iteam";
 /**
  * @description static filter list
  *
@@ -8,96 +8,51 @@ import FilterIteam from "./filter-iteam"
 
 const filtersList = {
   launch_year: {
-      label: "Launch Year",
-      id:"launch_year",
-      fields: [
-        {
-          label:2006,
-          active:true,
-        },
-        {
-          label:2007,
-          active:false,
-        },
-        {
-          label:2008,
-          active:false,
-        },
-        {
-          label:2009,
-          active:false,
-        },
-        {
-          label:2010,
-          active:false,
-        },
-        {
-          label:2011,
-          active:false,
-        },
-        {
-          label:2012,
-          active:false,
-        },
-        {
-          label:2013,
-          active:false,
-        },
-        {
-          label:2014,
-          active:false,
-        },
-        {
-          label:2015,
-          active:false,
-        },
-        {
-          label:2016,
-          active:false,
-        },
-        {
-          label:2017,
-          active:false,
-        },
-        {
-          label:2018,
-          active:false,
-        },
-        {
-          label:2019,
-          active:false,
-        },
-        {
-          label:2020,
-          active:false,
-        },
-      ],
-    },
-    launch_success: {
-      label: "Successfull Launch",
-      id:"launch_success",
-      fields: [{label:true,active:false}, {label:false,active:false}],
-    },
-    land_success: {
-      label: "Successfull Landing",
-      id:"land_success",
-      fields: [{label:true,active:false}, {label:false,active:false}],
-    },
-  };
-  /**
-   * 
-   * @description Filter Componenet
-   * @author Anuj Gupta
-   * 
-   */
-  const Filters = () => {
-    return (
-      <div className="filter_wrapper">
-        {map(filtersList, (value, index) => (
-          <FilterIteam value={value} key={index} />
-        ))}
-      </div>
-    );
-  };
+    label: "Launch Year",
+    id: "launch_year",
+    fields: [
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+    ],
+  },
+  launch_success: {
+    label: "Successfull Launch",
+    id: "launch_success",
+    fields: [true, false],
+  },
+  land_success: {
+    label: "Successfull Landing",
+    id: "land_success",
+    fields: [true, false],
+  },
+};
+/**
+ *
+ * @description Filter Componenet
+ * @author Anuj Gupta
+ *
+ */
+const Filters = () => {
+  return (
+    <div className="filter_wrapper">
+      {map(filtersList, (value, index) => (
+        <FilterIteam value={value} key={index} />
+      ))}
+    </div>
+  );
+};
 
-  export default Filters;
+export default Filters;

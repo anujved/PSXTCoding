@@ -1,6 +1,6 @@
 import React from 'react';
 import SuccessFail from "./success-fail";
-import { get } from "loadsh";
+import { get, toString } from "loadsh";
 import Img from "./img"
 import TableLyout from "./table-lyout";
 /**
@@ -24,8 +24,12 @@ const LaunchesList = ({ launch }) => {
         />
         <TableLyout label="Launch Year" text={get(launch, "launch_year")} />
         <TableLyout
-          label="Successful Launch"
+          label="Successful Launch:"
           text={<SuccessFail status={get(launch, "launch_success")} />}
+        />
+        <TableLyout
+          label="Successful Landing:"
+          text={toString(get(launch, "launch_landing",'-'))}
         />
         </ul>
       </div>

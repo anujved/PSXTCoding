@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 /**
  *
  * @param {Boolean} status required
@@ -9,9 +9,9 @@ import React from 'react';
  */
 const SuccessFail = ({ status }) => {
     if (status) {
-      return <b>Yes</b>;
+      return <Fragment>Yes</Fragment>;
     } else {
-      return <b>Fail</b>;
+      return <Fragment>Fail</Fragment>;
     }
   };
   export default SuccessFail;

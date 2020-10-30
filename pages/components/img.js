@@ -9,7 +9,9 @@ import Image from 'next/image'
  *
  */
 const Img = ({ url }) => {
-    return <div className="url_wrapper"><Image src={url} unsized={true} loading="lazy"/></div>;
+    return <div className="url_wrapper">
+      {url?<Image src={url} unsized={true} loading="lazy"/>:<div>image not available</div>}
+      </div>;
   };
 
 export default Img;
