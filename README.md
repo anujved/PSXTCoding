@@ -1,5 +1,3 @@
-This is a Publicis Sapient PS - XT Coding Assignment
-
 ## Getting Started
 
 ```bash
