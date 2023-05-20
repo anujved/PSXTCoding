@@ -17,10 +17,10 @@ jobs:
       - checkout
       - run:
           name: yarn install
-          command: yarn install
+          command: npm install
       - run:
           name: yarn build
-          command: yarn build
+          command: npm run build
 
   # yoga-build:
   #   docker:
