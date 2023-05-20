@@ -15,12 +15,16 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run: node --version
       - run:
           name: yarn install
-          command: npm install
+          command: yarn install
       - run:
           name: yarn build
-          command: npm run build
+          command: yarn run build
 
   # yoga-build:
   #   docker:
