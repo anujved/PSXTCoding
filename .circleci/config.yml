@@ -17,8 +17,22 @@ jobs:
       - node/install:
           install-yarn: true 
           node-version: '18' 
-          yarn-version: '1.22.19' 
-
+          yarn-version: '1.22.19'
+  yoga-build:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - docker/build:
+          attach-at: ./
+          debug: false
+          dockerfile: Dockerfile
+          image: yoga-docker
+          lint-dockerfile: false
+          path: .
+          registry: ere
+          tag: rtrt
+          treat-warnings-as-errors: false
 workflows:
   example-workflow:
     jobs:
