@@ -17,8 +17,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # RUN npx prisma generate
 # RUN yarn install
-RUN npx prisma generate
-RUN yarn build
+# RUN npx prisma generate
+# RUN yarn build
 
 FROM base AS runner
 WORKDIR /app
@@ -31,8 +31,8 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-#COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
