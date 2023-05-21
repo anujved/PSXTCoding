@@ -22,14 +22,14 @@ jobs:
           command: yarn run build
       - persist_to_workspace:
           root: .
-          paths: 'package.json'
+          paths:
 
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: /project
+          at: ~/project
       - setup_remote_docker
       - docker/build:
           attach-at: ./workplace 
