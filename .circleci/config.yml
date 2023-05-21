@@ -10,7 +10,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: pwd
-      - run: echo "Hello, world!" > workspace/echo-output
+      - run: echo "Hello, world!" > echo-output
       # - checkout
       # - node/install:
       #     install-yarn: true
