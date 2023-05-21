@@ -24,4 +24,9 @@ jobs:
 workflows:
   docker-build-workflow:
     jobs:
-      - buildContianer
+      - hold:
+          type: approval
+      - buildContianer:
+          filters:
+            branches:
+              only: master
