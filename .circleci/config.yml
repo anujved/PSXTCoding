@@ -4,55 +4,24 @@ orbs:
   docker: circleci/docker@1.7.0
   kubernetes: circleci/kubernetes@1.3.1
 jobs:
-  builTest:
-    docker:
-      - image: cimg/base:stable
-    working_directory: ~/project
-    steps:
-      - checkout
-      - node/install:
-          install-yarn: true
-          node-version: "16.13"
-      - run: node --version
-      - run:
-          name: yarn install
-          command: yarn install
-      - run:
-          name: yarn build
-          command: yarn run build
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
-      # - attach_workspace:
-      #     at: ~/project
       - checkout
       - node/install:
           install-yarn: true
           node-version: "16.13"
       - run: node --version
-      - run:
-          name: yarn install
-          command: yarn install
-      - run:
-          name: yarn build
-          command: yarn run build
       - setup_remote_docker
       - docker/build:
-          # attach-at: ./workplace
           debug: true
-          docker-context: ./workplace
+          docker-context: .
           image: yoga-docker
           lint-dockerfile: false
-          path: ./
+          path: .
           treat-warnings-as-errors: false
 workflows:
-  # example-workflow:
-  #   jobs:
-  #     - builTest
   docker-build-workflow:
     jobs:
-      # - builTest
       - buildContianer
-          # requires:
-          #   - builTest
