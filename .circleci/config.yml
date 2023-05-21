@@ -12,7 +12,7 @@ jobs:
       - checkout
       - node/install:
           install-yarn: true
-          node-version: '16.13'
+          node-version: "16.13"
       - run: node --version
       - run:
           name: yarn install
@@ -22,7 +22,7 @@ jobs:
           command: yarn run build
       - persist_to_workspace:
           root: .
-          paths: 
+          paths:
             - build
             - assets
             - .env
@@ -37,18 +37,15 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - run:
-          name: checkfolder
-          command: ls 
       - setup_remote_docker
       - docker/build:
-          attach-at: ./workplace 
-          debug: true 
-          docker-context: ./workplace 
-          image: yoga-docker 
-          lint-dockerfile: false 
-          path: ./ 
-          treat-warnings-as-errors: false 
+          attach-at: ./workplace
+          debug: true
+          docker-context: ./workplace
+          image: yoga-docker
+          lint-dockerfile: false
+          path: ./
+          treat-warnings-as-errors: false
 workflows:
   # example-workflow:
   #   jobs:
@@ -59,5 +56,3 @@ workflows:
       - buildContianer:
           requires:
             - builTest
-            
-        
