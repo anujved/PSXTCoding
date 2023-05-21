@@ -10,7 +10,7 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout:
-          path: project
+          path: ~/project
       - node/install:
           install-yarn: true
           node-version: '16.13'
@@ -22,9 +22,9 @@ jobs:
           name: yarn build
           command: yarn run build
       - persist_to_workspace:
-          root: /project
-          paths:
-            - echo-output
+          root: project
+          paths: 'package.json'
+
   buildContianer:
     docker:
       - image: cimg/base:stable
