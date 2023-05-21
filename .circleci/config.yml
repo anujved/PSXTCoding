@@ -39,7 +39,7 @@ jobs:
           command: yarn run build
       - setup_remote_docker
       - docker/build:
-          attach-at: ./workplace
+          # attach-at: ./workplace
           debug: true
           docker-context: ./workplace
           image: yoga-docker
