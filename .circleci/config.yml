@@ -12,10 +12,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - echo-output
       - node/install:
           install-yarn: true
           node-version: '16.13'
