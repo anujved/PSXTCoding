@@ -25,7 +25,7 @@ jobs:
           paths:
             - public
             - node_modules 
-            - build
+            - newfiles
             - assets
             - .env
             - Dockerfile
