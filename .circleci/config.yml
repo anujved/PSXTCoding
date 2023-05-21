@@ -22,7 +22,13 @@ jobs:
           command: yarn run build
       - persist_to_workspace:
           root: .
-          paths:
+          paths: 
+            - node_modules
+            - public
+            - .next
+            - package.json
+            - yarn.lock
+            - .env            
 
   buildContianer:
     docker:
