@@ -9,6 +9,11 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - run: mkdir -p workspace
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - echo-output
       - checkout
       - node/install:
           install-yarn: true
@@ -20,10 +25,7 @@ jobs:
       - run:
           name: yarn build
           command: yarn run build
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
+     
   buildContianer:
     docker:
       - image: cimg/base:stable
