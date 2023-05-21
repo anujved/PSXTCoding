@@ -22,7 +22,7 @@ jobs:
       #     name: yarn build
       #     command: yarn run build
       - persist_to_workspace:
-          root: project
+          root: ~/project
           paths:
             - echo-output
   buildContianer:
