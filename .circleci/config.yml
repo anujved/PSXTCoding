@@ -10,7 +10,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: pwd
-      - checkout
+      - run: echo "Hello, world!" > workspace/echo-output
+      # - checkout
       # - node/install:
       #     install-yarn: true
       #     node-version: '16.13'
