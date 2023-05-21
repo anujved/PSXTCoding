@@ -13,26 +13,24 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: '16.13'
-      # - run: node --version
-      # - run:
-      #     name: yarn install
-      #     command: yarn install
-      # - run:
-      #     name: yarn build
-      #     command: yarn run build
-      - run: 
-          name: currentlist
-          command: ls -a
+      - run: node --version
       - run:
-          name: backdirectory
-          command: cd ..
+          name: yarn install
+          command: yarn install
       - run:
-          name: list
-          command: ls -a
+          name: yarn build
+          command: yarn run build
       - persist_to_workspace:
           root: .
           paths: 
-            - project
+            - build
+            - assets
+            - .env
+            - Dockerfile
+            - next.config.js
+            - nexus.tsconfig.json
+            - package.json
+            - yarn.lock
   buildContianer:
     docker:
       - image: cimg/base:stable
@@ -42,15 +40,15 @@ jobs:
       - run:
           name: checkfolder
           command: ls 
-      # - setup_remote_docker
-      # - docker/build:
-      #     attach-at: ./workplace 
-      #     debug: true 
-      #     docker-context: ./workplace 
-      #     image: yoga-docker 
-      #     lint-dockerfile: false 
-      #     path: ./ 
-      #     treat-warnings-as-errors: false 
+      - setup_remote_docker
+      - docker/build:
+          attach-at: ./workplace 
+          debug: true 
+          docker-context: ./workplace 
+          image: yoga-docker 
+          lint-dockerfile: false 
+          path: ./ 
+          treat-warnings-as-errors: false 
 workflows:
   # example-workflow:
   #   jobs:
