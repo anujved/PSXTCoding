@@ -13,39 +13,38 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: '16.13'
-      - run: node --version
+      # - run: node --version
+      # - run:
+      #     name: yarn install
+      #     command: yarn install
+      # - run:
+      #     name: yarn build
+      #     command: yarn run build
       - run:
-          name: yarn install
-          command: yarn install
-      - run:
-          name: yarn build
-          command: yarn run build
+          name: backdirectory
+          command: cd ..
       - persist_to_workspace:
           root: .
           paths: 
-            - node_modules
-            - public
-            - .next
-            - package.json
-            - yarn.lock
-            - .env
-            - Dockerfile            
-
+            - project
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
           at: ~/project
-      - setup_remote_docker
-      - docker/build:
-          attach-at: ./workplace 
-          debug: true 
-          docker-context: ./workplace 
-          image: yoga-docker 
-          lint-dockerfile: false 
-          path: ./ 
-          treat-warnings-as-errors: false 
+      - run:
+          name: checkfolder
+          command: ls 
+      # - setup_remote_docker
+      # - docker/build:
+      #     attach-at: ./workplace 
+      #     debug: true 
+      #     docker-context: ./workplace 
+      #     image: yoga-docker 
+      #     lint-dockerfile: false 
+      #     path: ./ 
+      #     treat-warnings-as-errors: false 
 workflows:
   # example-workflow:
   #   jobs:
