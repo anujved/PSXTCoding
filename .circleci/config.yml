@@ -9,6 +9,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - run: whoami
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
       - persist_to_workspace:
