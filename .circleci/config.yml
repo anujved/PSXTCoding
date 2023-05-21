@@ -43,9 +43,9 @@ jobs:
           path: ./
           treat-warnings-as-errors: false
 workflows:
-  codePush-workflow:
-    jobs:
-      - builTest
+  # codePush-workflow:
+  #   jobs:
+  #     - builTest
   dockerbuild-workflow:
     jobs:
       - hold:
