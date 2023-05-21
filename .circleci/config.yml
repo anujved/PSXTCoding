@@ -9,19 +9,17 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run: pwd
-      - run: echo "Hello, world!" > echo-output
-      # - checkout
-      # - node/install:
-      #     install-yarn: true
-      #     node-version: '16.13'
-      # - run: node --version
-      # - run:
-      #     name: yarn install
-      #     command: yarn install
-      # - run:
-      #     name: yarn build
-      #     command: yarn run build
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run: node --version
+      - run:
+          name: yarn install
+          command: yarn install
+      - run:
+          name: yarn build
+          command: yarn run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -48,8 +46,8 @@ workflows:
   docker-build-workflow:
     jobs:
       - builTest
-      # - buildContianer:
-      #     requires:
-      #       - builTest
+      - buildContianer:
+          requires:
+            - builTest
             
         
