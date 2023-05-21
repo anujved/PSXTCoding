@@ -48,9 +48,9 @@ workflows:
   #     - builTest
   dockerbuild-workflow:
     jobs:
+      - builTest
       - hold:
           type: approval
-      - builTest
       - buildContianer:
           filters:
             branches:
