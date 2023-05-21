@@ -5,15 +5,13 @@ orbs:
   kubernetes: circleci/kubernetes@1.3.1
 jobs:
   builTest:
-    working_directory: /tmp
+    working_directory:  ~/project
     docker:
       - image: cimg/base:stable
     steps:
-      - run: mkdir -p workspace
-      - run: cd workspace
       - checkout
       - persist_to_workspace:
-          root: workspace
+          root: project
           paths:
             - echo-output
       - node/install:
@@ -32,7 +30,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/project
       - setup_remote_docker
       - docker/build:
           attach-at: ./workplace 
