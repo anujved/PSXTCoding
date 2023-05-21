@@ -20,25 +20,23 @@ jobs:
       - run:
           name: yarn build
           command: yarn run build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - public
-            - node_modules 
-            - newfiles
-            - assets
-            - .env
-            - Dockerfile
-            - next.config.js
-            - nexus.tsconfig.json
-            - package.json
-            - yarn.lock
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
-      - attach_workspace:
-          at: ~/project
+      # - attach_workspace:
+      #     at: ~/project
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: "16.13"
+      - run: node --version
+      - run:
+          name: yarn install
+          command: yarn install
+      - run:
+          name: yarn build
+          command: yarn run build
       - setup_remote_docker
       - docker/build:
           attach-at: ./workplace
@@ -54,7 +52,7 @@ workflows:
   #     - builTest
   docker-build-workflow:
     jobs:
-      - builTest
+      # - builTest
       - buildContianer:
-          requires:
-            - builTest
+          # requires:
+          #   - builTest
