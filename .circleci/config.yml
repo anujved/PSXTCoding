@@ -24,6 +24,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - setup_remote_docker
       - docker/build:
           attach-at: ./workplace 
           debug: true 
