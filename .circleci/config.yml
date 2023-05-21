@@ -10,11 +10,11 @@ jobs:
       - image: cimg/base:stable
     steps:
       - run: mkdir -p workspace
+      - checkout
       - persist_to_workspace:
           root: workspace
           paths:
             - echo-output
-      - checkout
       - node/install:
           install-yarn: true
           node-version: '16.13'
