@@ -20,6 +20,9 @@ jobs:
       # - run:
       #     name: yarn build
       #     command: yarn run build
+      - run: 
+          name: currentlist
+          command: ls -a
       - run:
           name: backdirectory
           command: cd ..
