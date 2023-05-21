@@ -3,5 +3,5 @@ module.exports = {
       domains: ['images2.imgbox.com'],
     },
     output: 'standalone',
-     distDir: 'build',
+     distDir: 'newfiles',
   }
