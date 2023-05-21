@@ -9,11 +9,9 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run: whoami
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
+      - run: mkdir -p yoga
       - persist_to_workspace:
-          root: workspace
+          root: yoga
           paths:
             - echo-output
       - checkout
@@ -32,7 +30,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/yoga
       - setup_remote_docker
       - docker/build:
           attach-at: ./workplace 
