@@ -53,6 +53,6 @@ workflows:
   docker-build-workflow:
     jobs:
       # - builTest
-      - buildContianer:
+      - buildContianer
           # requires:
           #   - builTest
