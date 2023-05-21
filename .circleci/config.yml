@@ -23,6 +23,9 @@ jobs:
       - run:
           name: backdirectory
           command: cd ..
+      - run:
+          name: list
+          command: ls -a
       - persist_to_workspace:
           root: .
           paths: 
