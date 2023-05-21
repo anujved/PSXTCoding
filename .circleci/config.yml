@@ -24,30 +24,23 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - node/install:
-          install-yarn: true
-          node-version: '16.13'
-      - run: node --version
-      - run:
-          name: yarn install
-          command: yarn install
-      - run:
-          name: yarn build
-          command: yarn run build
       - docker/build:
-          attach-at: ./
-          debug: false
-          dockerfile: Dockerfile
-          image: yoga-docker
-          lint-dockerfile: false
-          path: .
-          registry: ere
-          tag: rtrt
-          treat-warnings-as-errors: false
+          attach-at: ./workplace 
+          debug: true 
+          docker-context: ./workplace 
+          image: yoga-docker 
+          lint-dockerfile: false 
+          path: ./ 
+          treat-warnings-as-errors: false 
 workflows:
-  example-workflow:
-    jobs:
-      - builTest
+  # example-workflow:
+  #   jobs:
+  #     - builTest
   docker-build-workflow:
     jobs:
-      - buildContianer
+      - builTest
+      - buildContianer:
+          requires:
+            - builTest
+            
+        
