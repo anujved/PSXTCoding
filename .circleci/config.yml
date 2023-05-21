@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: mkdir -p yoga
       - persist_to_workspace:
-          root: yoga
+          root: /tmp/yoga
           paths:
             - echo-output
       - checkout
