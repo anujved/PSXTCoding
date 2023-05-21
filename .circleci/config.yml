@@ -10,10 +10,6 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - persist_to_workspace:
-          root: project
-          paths:
-            - echo-output
       - node/install:
           install-yarn: true
           node-version: '16.13'
@@ -24,7 +20,10 @@ jobs:
       - run:
           name: yarn build
           command: yarn run build
-     
+      - persist_to_workspace:
+          root: .
+          paths:
+            - echo-output
   buildContianer:
     docker:
       - image: cimg/base:stable
