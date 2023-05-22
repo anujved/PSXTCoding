@@ -22,7 +22,7 @@ jobs:
           command: yarn run build
       - run:
           name: move files
-          command: mv * workspace | mkdir workspace
+          command: mv * dir | mkdir dir
       - run:
           name: list
           command: ls -l 
@@ -35,7 +35,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/project/workspace
+          at: ~/project/dir
       - run:
           name: check command
           command: ls -l
