@@ -20,7 +20,9 @@ jobs:
       # - run:
       #     name: yarn build
       #     command: yarn run build
-   
+      - run:
+          name: make dir
+          command:  mkdir nextbuild
       - run:
           name: move files
           command: mv * nextbuild
