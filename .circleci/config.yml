@@ -32,25 +32,29 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/project
-      - setup_remote_docker
-      - docker/build:
-          attach-at: ./workplace
-          debug: true
-          docker-context: ./workplace
-          image: yoga-docker
-          lint-dockerfile: false
-          path: ./
-          treat-warnings-as-errors: false
+          at: ~/
+      - run:
+          name: check command
+          command: ls -l
+
+      # - setup_remote_docker
+      # - docker/build:
+      #     attach-at: ./workplace
+      #     debug: true
+      #     docker-context: ./workplace
+      #     image: yoga-docker
+      #     lint-dockerfile: false
+      #     path: ./
+      #     treat-warnings-as-errors: false
 workflows:
   # codePush-workflow:
   #   jobs:
   #     - builTest
   dockerbuild-workflow:
     jobs:
-      - builTest
-      - hold:
-          type: approval
+      # - builTest
+      # - hold:
+      #     type: approval
       - buildContianer:
           filters:
             branches:
