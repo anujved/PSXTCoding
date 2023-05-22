@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: move files
-          command: mkdir newdir && mv * newdir
+          command: mv * subfolder | mkdir subfolder
       - run:
           name: list
           command: ls -l 
