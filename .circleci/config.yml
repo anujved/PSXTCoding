@@ -22,7 +22,7 @@ jobs:
       #     command: yarn run build
       - run:
           name: make dir
-          command: mkdir buildpro
+          command: mv * ~/nextbuild
       - run:
           name: list
           command: ls -l 
