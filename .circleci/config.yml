@@ -32,7 +32,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/project
       - run:
           name: check command
           command: ls -l
