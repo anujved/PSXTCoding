@@ -10,33 +10,32 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-      # - node/install:
-      #     install-yarn: true
-      #     node-version: "16.13"
-      # - run: node --version
-      # - run:
-      #     name: yarn install
-      #     command: yarn install
-      # - run:
-      #     name: yarn build
-      #     command: yarn run build
-
+      - node/install:
+          install-yarn: true
+          node-version: "16.13"
+      - run: node --version
+      - run:
+          name: yarn install
+          command: yarn install
+      - run:
+          name: yarn build
+          command: yarn run build
       - run:
           name: move files
-          command: mv * subfolder | mkdir subfolder
+          command: mv * workspace | mkdir workspace
       - run:
           name: list
           command: ls -l 
-      # - persist_to_workspace:
-      #     root: .
-      #     paths:
-      #       - .
+      - persist_to_workspace:
+          root: .
+          paths:
+            - workspace
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/project/workspace
       - run:
           name: check command
           command: ls -l
