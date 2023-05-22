@@ -10,23 +10,26 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-      - node/install:
-          install-yarn: true
-          node-version: "16.13"
-      - run: node --version
+      # - node/install:
+      #     install-yarn: true
+      #     node-version: "16.13"
+      # - run: node --version
+      # - run:
+      #     name: yarn install
+      #     command: yarn install
+      # - run:
+      #     name: yarn build
+      #     command: yarn run build
       - run:
-          name: yarn install
-          command: yarn install
+          name: make dir
+          command: mkdir buildpro
       - run:
-          name: yarn build
-          command: yarn run build
-      - run:
-          name: backdirectory
-          command: cd ..
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
+          name: list
+          command: ls -l 
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - .
   buildContianer:
     docker:
       - image: cimg/base:stable
@@ -52,10 +55,10 @@ workflows:
   #     - builTest
   dockerbuild-workflow:
     jobs:
-      # - builTest
+      - builTest
       # - hold:
       #     type: approval
-      - buildContianer:
-          filters:
-            branches:
-              only: master
+      # - buildContianer:
+      #     filters:
+      #       branches:
+      #         only: master
