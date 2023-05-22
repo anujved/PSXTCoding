@@ -58,7 +58,7 @@ workflows:
       - builTest
       # - hold:
       #     type: approval
-      # - buildContianer:
-      #     filters:
-      #       branches:
-      #         only: master
+      - buildContianer:
+          filters:
+            branches:
+              only: master
