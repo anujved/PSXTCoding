@@ -20,22 +20,17 @@ jobs:
       # - run:
       #     name: yarn build
       #     command: yarn run build
-      - run:
-          name: move files
-          command: rsync -a -relative * newfolder
-      - run:
-          name: list
-          command: ls -l 
+      
       - persist_to_workspace:
           root: .
           paths:
-            - newfolder
+            - .
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/project/newfolder
+          at: ~/project
       - run:
           name: check command
           command: ls -l
