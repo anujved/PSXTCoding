@@ -6,7 +6,7 @@ orbs:
 jobs:
   builTest:
     docker:
-      - image: cimg/base:stable
+      - image: digitalocean/doctl
     working_directory: ~/project
     steps:
       - checkout
