@@ -24,7 +24,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - '*'
   buildContianer:
     docker:
       - image: cimg/base:stable
