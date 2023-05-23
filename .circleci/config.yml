@@ -21,16 +21,17 @@ jobs:
       #     name: yarn build
       #     command: yarn run build
       
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - '*'
   buildContianer:
     docker:
       - image: cimg/base:stable
     steps:
-      - attach_workspace:
-          at: ~/project
+      # - attach_workspace:
+      #     at: '.'
+      - checkout
       - run:
           name: check command
           command: ls -l
@@ -50,7 +51,7 @@ workflows:
   #     - builTest
   dockerbuild-workflow:
     jobs:
-      - builTest
+      # - builTest
       # - hold:
       #     type: approval
       - buildContianer:
