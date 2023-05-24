@@ -3,7 +3,6 @@ orbs:
   node: circleci/node@5.1.0
   docker: circleci/docker@1.7.0
   kubernetes: circleci/kubernetes@1.3.1
-  digitalocean: digitalocean/cli@0.1.1
 
 jobs:
   builTest:
@@ -29,11 +28,11 @@ jobs:
       - checkout
       - run:
           name: check command
-          command: ls -l
-      - setup_remote_docker
-      - digitalocean/install
-      - digitalocean/initialize:
-          digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
+          command: echo $CIRCLE_SHA1 
+      # - setup_remote_docker
+      # - digitalocean/install
+      # - digitalocean/initialize:
+      #     digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       # - docker/build:
       #     attach-at: .
       #     debug: true
@@ -45,12 +44,12 @@ jobs:
       # - doctl/install_and_initialize_cli:
       #     context: credential
       #     executor: doctl/default
-      - run:
-          name: tagdocker docker image
-          command: docker tag yogi-nextjs registry.digitalocean.com/yogimaps-container-registry/yogi-nextjs
-      - run:
-          name: push docker image
-          command: docker push registry.digitalocean.com/yogimaps-container-registry/yogi-nextjs
+      # - run:
+      #     name: tagdocker docker image
+      #     command: docker tag yogi-nextjs registry.digitalocean.com/yogimaps-container-registry/yogi-nextjs
+      # - run:
+      #     name: push docker image
+      #     command: docker push registry.digitalocean.com/yogimaps-container-registry/yogi-nextjs
 workflows:
   # example-workflow:
   #   jobs:
